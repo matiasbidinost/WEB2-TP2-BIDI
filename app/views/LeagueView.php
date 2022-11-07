@@ -1,6 +1,6 @@
 <?php
 
-class ApiView
+class LeagueView
 {
     public function showLigas($ligas, $status)
     {

@@ -1,5 +1,5 @@
 <?php
-class ApiModel
+class LeagueModel
 {
   private $db;
   public function __construct()
