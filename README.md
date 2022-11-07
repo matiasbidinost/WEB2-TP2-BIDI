@@ -8,3 +8,8 @@ hay un error en el controller que nose que es lo que lo produce, nose como soluc
 
 7/11 Juan
 Acomode el error en controller, agregue cositas JSONView, view, y routers, que hacen que ande en la consulta y lo devuelva y muestra :D
+---Juan muestro Ligas completa (GET)
+---Muestro ligas por ID (GET)
+---Agrego liga (POST)
+---Borro liga (DELETE)
+---Modifico league (PUT)
