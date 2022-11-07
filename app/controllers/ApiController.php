@@ -18,12 +18,14 @@ class ApiController
     //       return
     //     $this->apiView->response($tareas, 200);
     //  }
-    public function showLeagues(){
-        $ligas = $this->apiModel->getAllLigas();
-        if (!empty($ligas)) {
-          $this->apiView->showLigas($ligas, 200);
-        }else{
-            $this->ApiView->error(404);
-        }
+    public function showLeagues($params = null){
+        // $ligas = $this->apiModel->getAllLigas();
+        // if (!empty($ligas)) {
+        //   $this->apiView->showLigas($ligas, 200);
+        // }else{
+        //     $this->ApiView->error(404);
+        // }
+      $ligas = $this->apiModel->getAllLigas();
+      return $this->apiView->response($ligas, 200);
     }
 }

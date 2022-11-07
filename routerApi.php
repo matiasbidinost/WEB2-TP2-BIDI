@@ -2,12 +2,13 @@
 require_once "./libs/RouterConfig.php";
 require_once "./app/controllers/ApiController.php";
 
+define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
 // crea el router
 $router = new Router();
 
 // define la tabla de ruteo
 
-$router->addRoute('ligas', 'GET', 'ApiController', 'showLeagues');
+$router->addRoute('/ligas', 'GET', 'ApiController', 'showLeagues');
 //$router->addRoute('ligas', 'POST', 'ApiController', 'newLeagues');
 //$router->addRoute('ligas/:ID', 'DELETE', 'ApiController', 'deleteLeague');
 ////$router->addRoute('ligas/:ID', 'PUT', 'ApiController', 'deleteLeague');
