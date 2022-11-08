@@ -19,3 +19,4 @@ agregue funciones en team, por ahora solo hay una, mañana continuo. Creo que ta
 
 8/11 matias
 agregue mas funciones a team , limpie algo de codigo y agregue llaves
+Intente proseguir con el addTeam, imposible nose como tomar la fk para checkearla, ELIMINAR LIGA tiene un error tambien, deje comentarios en las lineas q para mi no tienen mucho sentido o no entienod porque estan ahi, MODIFICAR LIGA tambien tiene un error, no checkea que todos los parametros esten llenos igual que pasa con AGREGAR LIGA

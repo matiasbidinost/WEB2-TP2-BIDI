@@ -16,4 +16,10 @@ class TeamModel
     $query->execute(array($id));
     return $query->fetchAll(PDO::FETCH_OBJ);
   }
+  public function newTeam($id_fk_liga, $nombre, $logo, $historia, $jugadores) {
+    $query = $this->db->prepare('INSERT INTO equipos(id_fk_liga, nombre, logo, historia, jugadores) VALUES(?,?,?,?,?)');
+    $query->execute([$id_fk_liga, $nombre, $logo, $historia, $jugadores]); 
+    return $this->db->lastInsertId();
+  }
+  
 }
