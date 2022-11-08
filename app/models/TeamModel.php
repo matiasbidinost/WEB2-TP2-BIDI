@@ -11,4 +11,9 @@ class TeamModel
     $query->execute();
     return $query->fetchAll(PDO::FETCH_OBJ);
   }
+  public function getTeamById($id){
+    $query = $this->db->prepare('SELECT * FROM equipos WHERE id_equipo=?');
+    $query->execute($id);
+    return $query->fetchAll(PDO::FETCH_OBJ);
+  }
 }

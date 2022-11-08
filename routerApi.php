@@ -17,6 +17,8 @@ $router->addRoute("/ligas/:ID", "PUT", "LeagueController", "updateLeague");
 
 //teams
 $router->addRoute('/equipos','GET','TeamController', 'showTeams');
+$router->addRoute('/equipos/:ID', 'GET','TeamController','showIdTeam');
+
 // rutea
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
 
