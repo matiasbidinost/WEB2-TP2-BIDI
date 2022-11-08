@@ -33,10 +33,11 @@ class LeagueController
         $id = $params[':ID'];
         
       $ligas = $this->leagueModel->getLigasID($id);     
-        if ($ligas)
+        if ($ligas){
             $this->leagueView->response($ligas, 200);
-        else
-            $this->leagueView->response("La liga con el id={$id} no existe", 404);
+        }else{
+            $this->leagueView->response("La liga con el id=$id no existe", 404);
+        }
     } 
     // Elimino una Liga por ID
     public function deleteLeague($params = null) {
@@ -45,8 +46,10 @@ class LeagueController
         if ($ligas) {
             $this->leagueModel->deleteLigas($id);
             $this->leagueView->response("La liga fue borrada con exito.", 200);
-        } else
+        } else{
             $this->leagueView->response("La liga con el id={$id} no existe", 404);
+    
+        }
     }
 
     // Creo una Liga Por ID
@@ -55,11 +58,11 @@ class LeagueController
         $id = $this->leagueModel->newLeague($data->logo, $data->liga, $data->record, $data->historia);
         
         $ligas = $this->leagueModel->getLigasID($id); 
-        if ($ligas)
+        if ($ligas){
             $this->leagueView->response($ligas, 200);
-        else
-            $this->leagueView->response("La liga no fue creada", 500);
-
+        }else{
+            $this->leagueView->response("La liga no pudo ser fue creada", 500);
+        }
     }
     // Modifico una liga
         public function updateLeague($params = null) {
@@ -73,8 +76,9 @@ class LeagueController
             $historia = $data->historia;
             $this->leagueModel->updateLigas($id, $logo, $liga, $record, $historia);
             $this->leagueView->response("La liga fue modificada con exito.", 200);
-        } else
+        } else{
             $this->leagueView->response("La liga con el id={$id} no existe", 404);
+        }
     }
 
 

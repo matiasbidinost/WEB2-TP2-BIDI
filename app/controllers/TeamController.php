@@ -22,7 +22,7 @@ class TeamController
     {
         return json_decode($this->data);
     }
-    
+
     public function showTeams($params = null)
     {
         $equipos = $this->teamModel->getAllTeams();
@@ -33,9 +33,14 @@ class TeamController
         $id = $params[':ID'];
         if (!empty($id)) {
             $equipo = $this->teamModel->getTeamById($id);
-            return $this->teamView->response($equipo, 200);
+            if((count($equipo))>1){
+            $this->teamView->response($equipo, 200);
+            }else{
+                $this->teamView->response("el id $id no existe",404);
+            }
         } else {
-            $this->teamView->response($id, 404);
+            $this->teamView->response("el id $id no existe", 404);
         }
     }
+    
 }

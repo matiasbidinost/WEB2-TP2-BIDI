@@ -16,3 +16,6 @@ Acomode el error en controller, agregue cositas JSONView, view, y routers, que h
 
 7/11 matias
 agregue funciones en team, por ahora solo hay una, mañana continuo. Creo que tambien tengo que arreglar el delete de ligas para que elimine todos los equipos tambien
+
+8/11 matias
+agregue mas funciones a team , limpie algo de codigo y agregue llaves

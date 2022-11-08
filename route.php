@@ -1,5 +1,5 @@
 <?php
-require_once('Router.php');
+require_once('router.php');
 require_once "./app/controllers/LeagueController.php";
 require_once "./app/controllers/TeamController.php";
     
@@ -10,11 +10,11 @@ require_once "./app/controllers/TeamController.php";
 
     // rutas
     $r->addRoute('ligas', 'GET', 'LeagueController', 'showLeagues');
-    $r->addRoute('equipos', 'GET', 'TeamController', 'showTeams');
+    //$r->addRoute('equipos', 'GET', 'TeamController', 'showTeams');//tambien nnecesito uno de teams?
 
     //Ruta por defecto.
     $r->setDefaultRoute("LeagueController", "showLeagues");
-    $r->setDefaultRoute("TeamController", "showTeams");
+    //$r->setDefaultRoute("TeamController", "showTeams");
 
     //run
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
