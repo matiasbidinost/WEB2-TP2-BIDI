@@ -13,3 +13,6 @@ Acomode el error en controller, agregue cositas JSONView, view, y routers, que h
 ---Agrego liga (POST)
 ---Borro liga (DELETE)
 ---Modifico league (PUT)
+
+7/11 matias
+agregue funciones en team, por ahora solo hay una, mañana continuo. Creo que tambien tengo que arreglar el delete de ligas para que elimine todos los equipos tambien
