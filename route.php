@@ -15,7 +15,7 @@ require_once "./app/controllers/TeamController.php";
     //Ruta por defecto.
     $r->setDefaultRoute("LeagueController", "showLeagues");
     //$r->setDefaultRoute("TeamController", "showTeams");
-
+    //lo puedo eliminar, porq cummple la funcion del router viejo, que ahora mismo no es necesario para la entrega
     //run
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
 ?>

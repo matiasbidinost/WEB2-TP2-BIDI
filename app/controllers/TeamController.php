@@ -47,8 +47,9 @@ class TeamController
     }
     public function addTeam($params = null){
         $data = $this->getData();
-        $league = $this->leagueModel->getLigasID($data->id_fk_liga);
-        if((count($league))>0){
+        $id_fk_liga = $data->id_fk_liga;
+        $league = $this->leagueModel->getLigasID($id_fk_liga);
+        if(!empty($league)){
         $id = $this->teamModel->newTeam($data->id_fk_liga, $data->nombre, $data->logo, $data->historia, $data->jugadores);
         
 /*         Warning</b>:  Attempt to read property "id_fk_liga" on array in <b>C:\xampp\htdocs\WEB2-TP2-BIDI\app\controllers\TeamController.php</b> on line <b>50</b><br />
