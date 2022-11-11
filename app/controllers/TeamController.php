@@ -45,24 +45,15 @@ class TeamController
             $this->teamView->response("el id $id no existe", 404);
         }
     }
+    // Agrego equipo
     public function addTeam($params = null){
         $data = $this->getData();
         $id_fk_liga = $data->id_fk_liga;
         $league = $this->leagueModel->getLigasID($id_fk_liga);
         if(!empty($league)){
-        $id = $this->teamModel->newTeam($data->id_fk_liga, $data->nombre, $data->logo, $data->historia, $data->jugadores);
-        
-/*         Warning</b>:  Attempt to read property "id_fk_liga" on array in <b>C:\xampp\htdocs\WEB2-TP2-BIDI\app\controllers\TeamController.php</b> on line <b>50</b><br />
-<br />
-<b>Fatal error</b>:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, bool given in C:\xampp\htdocs\WEB2-TP2-BIDI\app\controllers\TeamController.php:51
-Stack trace:
-#0 C:\xampp\htdocs\WEB2-TP2-BIDI\router.php(41): TeamController-&gt;addTeam(Array)
-#1 C:\xampp\htdocs\WEB2-TP2-BIDI\router.php(59): Route-&gt;run()
-#2 C:\xampp\htdocs\WEB2-TP2-BIDI\routerApi.php(26): Router-&gt;route('equipos', 'POST')
-#3 {main}
-  thrown in <b>C:\xampp\htdocs\WEB2-TP2-BIDI\app\controllers\TeamController.php</b> on line <b>51</b><br /> */
-        if(!empty($id)){
-            $this->teamView->response($id, 200);
+        $equipos = $this->teamModel->newTeam($data->id_fk_liga, $data->nombre, $data->logo, $data->historia, $data->jugadores);
+        if(!empty($equipos)){
+            $this->teamView->response($equipos, 200);
         }else{
             $this->teamView->response("no se pudo completar la accion con exito, llene todos los campos", 404);
         }
@@ -70,5 +61,18 @@ Stack trace:
             $this->teamView->response("error, no existe un una liga para ese equipo", 400);
         }
     }
+    public function deleteTeam($params = null){
+      $id = $params[':ID'];
+      $equipo = $this->teamModel->getTeamById($id);
 
-}
+      if($equipo){
+        $this->teamModel->deleteEquipos($id);
+        $teamDelete = $this->teamModel->getTeamById($id);
+        if($equipo){
+                $this->teamView->response("El equipo fue borrada con exito.", 200);
+            }
+        } else {
+            $this->teamView->response("El equipo con el id={$id} no existe", 404);
+        }
+    }
+  }

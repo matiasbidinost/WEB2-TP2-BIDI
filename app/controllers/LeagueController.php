@@ -45,8 +45,6 @@ class LeagueController
     // Elimino una Liga por ID
     public function deleteLeague($params = null)
     {
-        //error! no puedo eliminar una liga si antes no checkeo si contiene o no equipos,
-        //opcion1: eliminar todos los equipos tambien, op2: decirle q no se puede, op3:pasar los equipos a una fk con paramaetro null
         $id = $params[':ID'];
         $liga = $this->leagueModel->getLigasID($id);
         if ($liga) {

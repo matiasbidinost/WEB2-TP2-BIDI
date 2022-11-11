@@ -9,9 +9,9 @@ $router = new Router();
 
 // define la tabla de ruteo
 
+// $router->setDefaultRoute("LeagueController", "showLeagues"); //no necesito esto para que me setee el default?
 
 $router->addRoute('/ligas', 'GET', 'LeagueController', 'showLeagues');
-$router->setDefaultRoute("LeagueController", "showLeagues"); //no necesito esto para que me setee el default?
 $router->addRoute('/ligas/:ID', 'GET', 'LeagueController', 'showIDLeague');
 $router->addRoute("/ligas/:ID", "DELETE", "LeagueController", "deleteLeague");
 $router->addRoute("/ligas", "POST", "LeagueController", "addLeague");
@@ -21,6 +21,7 @@ $router->addRoute("/ligas/:ID", "PUT", "LeagueController", "updateLeague");
 $router->addRoute('/equipos','GET','TeamController', 'showTeams');
 $router->addRoute('/equipos/:ID', 'GET','TeamController','showIdTeam');
 $router->addRoute('/equipos','POST','TeamController','addTeam');
+$router->addRoute('/equipos/:ID', 'DELETE', 'TeamController', 'deleteTeam');
 
 // rutea
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

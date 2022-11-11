@@ -21,5 +21,8 @@ class TeamModel
     $query->execute([$id_fk_liga, $nombre, $logo, $historia, $jugadores]); 
     return $this->db->lastInsertId();
   }
-  
+  public function deleteEquipos($idEquipo){
+    $query = $this->db->prepare('DELETE FROM equipos WHERE id_equipo=?');
+    $query->execute([$idEquipo]);
+  }
 }
