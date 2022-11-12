@@ -22,6 +22,7 @@ $router->addRoute('/equipos','GET','TeamController', 'showTeams');
 $router->addRoute('/equipos/:ID', 'GET','TeamController','showIdTeam');
 $router->addRoute('/equipos','POST','TeamController','addTeam');
 $router->addRoute('/equipos/:ID', 'DELETE', 'TeamController', 'deleteTeam');
+$router->addRoute('/equipos/:ID', 'PUT', 'TeamController', 'modifyTeam');
 
 // rutea
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);

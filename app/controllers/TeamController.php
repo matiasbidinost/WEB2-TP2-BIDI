@@ -75,4 +75,20 @@ class TeamController
             $this->teamView->response("El equipo con el id={$id} no existe", 404);
         }
     }
+    public function modifyTeam($params = null){
+        $id = $params[':ID'];
+        $equipos = $this->teamModel->getTeamById($id);
+        if ($equipos) {
+            $data = $this->getData();
+            $id_fk_liga = $data->id_fk_liga;
+            $nombre = $data->nombre;
+            $logo = $data->logo;
+            $historia = $data->historia;
+            $jugadores = $data->jugadores;
+            $this->teamModel->updateEquipos($id_fk_liga, $nombre, $logo, $historia, $jugadores);
+            $this->teamView->response("El equipo fue modificada con exito.", 200);
+        } else {
+            $this->teamView->response("El equipo con el id={$id} no existe", 404);
+        }
+    }
   }
