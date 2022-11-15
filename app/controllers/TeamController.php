@@ -1,13 +1,12 @@
 <?php
 require_once "./app/models/TeamModel.php";
-require_once "./app/models/LeagueModel.php"; //lo necesito para poder saber que el equipo agregado corresponde a una liga
-require_once "./app/views/TeamView.php";
+require_once "./app/models/LeagueModel.php"; 
 require_once "./api/JSONView.php";
 
 class TeamController
 {
     private $teamModel;
-    private $leagueModel; //lo necesito para poder saber que el equipo agregado corresponde a una liga
+    private $leagueModel; 
     private $teamView;
 
     private $data;
@@ -15,8 +14,7 @@ class TeamController
     public function __construct()
     {
         $this->teamModel = new TeamModel();
-        $this->leagueModel = new LeagueModel(); //lo necesito para poder saber que el equipo agregado corresponde a una liga
-        $this->teamView = new TeamView();
+        $this->leagueModel = new LeagueModel(); 
         $this->teamView = new JSONView();
         $this->data = file_get_contents("php://input");
     }
@@ -27,37 +25,57 @@ class TeamController
     }
     public function showAll($params = null)
     {
-
-        if ((isset($params) && !empty($params))&&is_numeric($params[':LIMITE'])) {
+        if (isset($params) && !empty($params)) {
             $orden = strtoupper($params[':ORDEN']);
             $campo = strtolower($params[':CAMPO']);
-            $limite =intval($params[':LIMITE']);
-            
-            if(!empty($orden)&&!empty($campo)&&!empty($limite)){
-            if ($orden == 'ASC') {
-                if ($campo == 'id_equipo' || $campo == 'id_fk_liga' || $campo == 'nombre' || $campo == 'logo' || $campo == 'historia' || $campo == 'jugadores') {
+            $teams = $this->teamModel->getAllteams();
 
-                    $equipos = $this->teamModel->getAllTeamsAsc($campo,$limite);
+
+            if ($orden == 'ASC') {
+                if (isset($teams[1]->$campo)) {
+
+                    $equipos = $this->teamModel->getAllTeamsAsc($campo);
                     $this->teamView->response($equipos, 200);
                 } else {
                     $this->teamView->response("error, no se puede ordenar por un parametro inexistente ", 404);
                 }
             } else if ($orden == 'DESC') {
-                if ($campo == 'id_equipo' || $campo == 'id_fk_liga' || $campo == 'nombre' || $campo == 'logo' || $campo == 'historia' || $campo == 'jugadores') {
-                    $equipos = $this->teamModel->getAllTeamsDesc($campo,$limite);
+                if (isset($teams[1]->$campo)) {
+                    $equipos = $this->teamModel->getAllTeamsDesc($campo);
                     $this->teamView->response($equipos, 200);
                 } else {
                     $this->teamView->response("error, no se puede ordenar por un parametro inexistente ", 400);
                 }
             } else {
-                $this->teamView->response("usted no utilizo un orden valido, utilice la palabra correcta y un limite mayor a 0", 400);
+                $this->teamView->response("usted no utilizo un orden valido, utilice la palabra correcta", 400);
             }
         } else {
-            $this->teamView->response("2error, debe decidir en que orden van los elementos (ASC=ascendente o DESC=descendente), por cual campo y su cantidad(numero)", 400);
+            $this->teamView->response("error, debe decidir en que orden van los elementos (ASC=ascendente o DESC=descendente),y por cual campo", 400);
         }
-    }else {
-        $this->teamView->response("1error, debe decidir en que orden van los elementos (ASC=ascendente o DESC=descendente), por cual campo y su cantidad(numero)", 400);
     }
+    public function showAllLimit($params = null)
+    {
+        if (isset($params) && !empty($params)) {
+            if (is_numeric($params[':PAGNUM'])) {
+                $id = intval($params[':PAGNUM']);
+                $limite = 3;
+                $cant = $this->teamModel->getAllTeams();
+                $totalCant = count($cant);
+                $start = ($id - 1) * $limite;
+                $total_pages = ceil($totalCant / $limite);
+
+                if ($id > 0 && $id <= $total_pages) {
+                    $todo = $this->teamModel->showAll_limit($start, $limite);
+                    $this->teamView->response($todo, 200);
+                } else {
+                    $this->teamView->response("pagina inexistente", 404);
+                }
+            } else {
+                $this->teamView->response("ingrese un numero entero", 400);
+            }
+        } else {
+            $this->teamView->response("no se ingreso un valor valido", 400);
+        }
     }
 
     public function showTeams()
@@ -135,7 +153,7 @@ class TeamController
             $this->teamView->response("error, los parametros tienen que estar llenos para realizar esta tarea", 400);
         }
     }
-    public function modifyTeam()
+    public function modifyTeam($params = null)
     {
         if (isset($params) && !empty($params)) {
             $id = $params[':ID'];
@@ -147,8 +165,9 @@ class TeamController
                 $logo = $data->logo;
                 $historia = $data->historia;
                 $jugadores = $data->jugadores;
-                $this->teamModel->updateEquipos($id_fk_liga, $nombre, $logo, $historia, $jugadores);
-                $this->teamView->response("El equipo fue modificada con exito.", 201);
+
+                $this->teamModel->updateEquipos($id, $id_fk_liga, $nombre, $logo, $historia, $jugadores);
+                $this->teamView->response("El equipo fue modificado con exito.", 201);
             } else {
                 $this->teamView->response("El equipo con el id={$id} no existe", 404);
             }

@@ -1,6 +1,5 @@
 <?php
 require_once "./app/models/LeagueModel.php";
-require_once "./app/views/LeagueView.php";
 require_once "./api/JSONView.php";
 
 class LeagueController
@@ -13,7 +12,6 @@ class LeagueController
     public function __construct()
     {
         $this->leagueModel = new LeagueModel();
-        $this->leagueView = new LeagueView();
         $this->leagueView = new JSONView();
         $this->data = file_get_contents("php://input");
     }
@@ -88,18 +86,22 @@ class LeagueController
     // Modifico una liga
     public function updateLeague($params = null)
     {
-        $id = $params[':ID'];
-        $ligas = $this->leagueModel->getLigasID($id);
-        if ($ligas) {
-            $data = $this->getData();
-            $logo = $data->logo;
-            $liga = $data->liga;
-            $record = $data->record;
-            $historia = $data->historia;
-            $this->leagueModel->updateLigas($id, $logo, $liga, $record, $historia);
-            $this->leagueView->response("La liga fue modificada con exito.", 200);
+        if (isset($params) && !empty($params)) {
+            $id = $params[':ID'];
+            $ligas = $this->leagueModel->getLigasID($id);
+            if ($ligas) {
+                $data = $this->getData();
+                $logo = $data->logo;
+                $liga = $data->liga;
+                $record = $data->record;
+                $historia = $data->historia;
+                $this->leagueModel->updateLigas($id, $logo, $liga, $record, $historia);
+                $this->leagueView->response("La liga fue modificada con exito.", 200);
+            } else {
+                $this->leagueView->response("La liga con el id={$id} no existe", 404);
+            }
         } else {
-            $this->leagueView->response("La liga con el id={$id} no existe", 404);
+            $this->leagueView->response("Usted no agrego un id", 404);
         }
     }
 }

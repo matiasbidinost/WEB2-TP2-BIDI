@@ -9,9 +9,8 @@ $router = new Router();
 
 // define la tabla de ruteo
 
-$router->addRoute('/todo/:ORDEN/:CAMPO/:LIMITE','GET','TeamController', 'showAll');
-//$router->addRoute('/todo/orden/:ORDEN','GET','TeamController', 'showAll');
-//hay q dividir la ruta de arriba en todo/campo/:CAMPO y todo/limite/LIMITE
+$router->addRoute('/equipos/ordenar/:CAMPO/:ORDEN','GET','TeamController', 'showAll');
+$router->addRoute('/equipos/paginar/:PAGNUM','GET','TeamController','showAllLimit');
 
 
 $router->addRoute('/ligas', 'GET', 'LeagueController', 'showLeagues');
@@ -29,13 +28,3 @@ $router->addRoute('/equipos/:ID', 'PUT', 'TeamController', 'modifyTeam');
 
 // rutea
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
-
-
-
-
-
-
-
-
-
-?>

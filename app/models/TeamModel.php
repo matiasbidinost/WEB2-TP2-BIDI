@@ -6,15 +6,21 @@ class TeamModel
   {
     $this->db = new PDO('mysql:host=localhost;' . 'dbname=liga;charset=utf8', 'root', '');
   }
-  public function getAllTeamsAsc($campo,$limite)
-  { 
-    $query = $this->db->prepare('SELECT * FROM equipos ORDER BY '.$campo.' ASC LIMIT '.$limite);
+  public function getAllTeamsAsc($campo)
+  {
+    $query = $this->db->prepare('SELECT * FROM equipos ORDER BY ' . $campo . ' ASC');
     $query->execute();
     return $query->fetchAll(PDO::FETCH_OBJ);
   }
-  public function getAllTeamsDesc($campo,$limite)
-  { 
-    $query = $this->db->prepare('SELECT * FROM equipos ORDER BY '.$campo.' DESC');
+  public function showAll_limit($id, $limite)
+  {
+    $query = $this->db->prepare('SELECT * FROM equipos ORDER BY id_equipo LIMIT ' . $id . ',' . $limite);
+    $query->execute();
+    return $query->fetchAll(PDO::FETCH_OBJ);
+  }
+  public function getAllTeamsDesc($campo)
+  {
+    $query = $this->db->prepare('SELECT * FROM equipos ORDER BY ' . $campo . ' DESC');
     $query->execute();
     return $query->fetchAll(PDO::FETCH_OBJ);
   }
@@ -41,9 +47,9 @@ class TeamModel
     $query = $this->db->prepare('DELETE FROM equipos WHERE id_equipo=?');
     $query->execute([$idEquipo]);
   }
-  public function updateEquipos($id_fk_liga, $nombre, $logo, $historia, $jugadores)
+  public function updateEquipos($id, $id_fk_liga, $nombre, $logo, $historia, $jugadores)
   {
-    $query = $this->db->prepare('UPDATE equipos SET (id_fk_liga, nombre, logo, historia, jugadores) VALUES(?,?,?,?,?)');
-    $query->execute([$id_fk_liga, $nombre, $logo, $historia, $jugadores]);
+    $query = $this->db->prepare('UPDATE equipos SET id_fk_liga=?, nombre=?, logo=?, historia=?, jugadores=? WHERE id_equipo=?');
+    $query->execute([$id, $id_fk_liga, $nombre, $logo, $historia, $jugadores]);
   }
 }

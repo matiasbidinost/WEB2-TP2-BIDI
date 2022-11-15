@@ -1,4 +1,24 @@
 Bienvenido al tp de web2 de juan y mati
+ENDPOINTS
+agregar: localhost/WEB2-TP2-BIDI/api/equipos  (PARAMETROS)  (equipos o ligas)(PUT)
+actualizar: localhost/WEB2-TP2-BIDI/api/equipos/num  (num=id del que va a modificar)(PARAMETROS) (equipos o ligas)(POST)
+borrar: localhost/WEB2-TP2-BIDI/api/equipos/num (ligas o equipos)(num=id del cual se quiere eliminar) (DELETE)
+compaginar: localhost/WEB2-TP2-BIDI/api/equipos/paginar/1 (el numero final es la pagina que quiere ir) (GET)
+ordenar por,Asc o Desc: localhost/WEB2-TP2-BIDI/api/equipos/ordenar/nombre/asc (GET)
+
+(parametros a tener en cuenta : id_equipo, id_fk_liga, nombre, logo, historia, jugadores)
+
+EJ DE PARAMETROS PARA AGREGAR EQUIPOS:
+{ "id_fk_liga": 1,
+    "nombre": "Club Atlético Barrio Parque(Córdoba) MATIASSSSSSSSS",
+    "logo": "imagen/barrioParqueArg.pngMATIAAAASS",
+    "historia": "LA MEJORASDAAAAAAAAAAA",
+    "jugadores":"MATIASSSSS"
+    }
+
+
+
+
 -Primeros pasos de router (matias)
 public function controllerparam(&param=null)->si este param no se trae te lo cambia a null y lo permito igual
 -POSTMAN create a request=agregar esta linea en el postman + el metodo https://localhost/WEB2-TP2-BIDI/
@@ -26,3 +46,6 @@ modifique el if de errores, param solo es utilizable si se manda por get no por 
 
 15/11 matias
 limpie codigo, agregue funciones de team, hice el compaginado de la pagina pero me quedo incoompleto, me falta separarlo en dos
+
+15/11 matias
+Agregue funciones, agregue paginado, mejore sintaxis para ordenar parametros de una manera mas limpia, separe funciones

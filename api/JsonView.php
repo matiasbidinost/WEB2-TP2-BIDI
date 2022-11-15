@@ -17,6 +17,7 @@ class JSONView {
     private function _requestStatus($code){
         $status = array(
           200 => "OK",
+          201 =>"created",
           404 => "Not found",
           400 => "Server does not know how to response",
           500 => "Internal Server Error"
