@@ -23,3 +23,6 @@ Intente proseguir con el addTeam, imposible nose como tomar la fk para checkearl
 
 10/11  matias
 modifique el if de errores, param solo es utilizable si se manda por get no por post
+
+15/11 matias
+limpie codigo, agregue funciones de team, hice el compaginado de la pagina pero me quedo incoompleto, me falta separarlo en dos

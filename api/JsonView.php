@@ -18,6 +18,7 @@ class JSONView {
         $status = array(
           200 => "OK",
           404 => "Not found",
+          400 => "Server does not know how to response",
           500 => "Internal Server Error"
         );
         return (isset($status[$code]))? $status[$code] : $status[500];

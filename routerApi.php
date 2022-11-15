@@ -9,7 +9,10 @@ $router = new Router();
 
 // define la tabla de ruteo
 
-// $router->setDefaultRoute("LeagueController", "showLeagues"); //no necesito esto para que me setee el default?
+$router->addRoute('/todo/:ORDEN/:CAMPO/:LIMITE','GET','TeamController', 'showAll');
+//$router->addRoute('/todo/orden/:ORDEN','GET','TeamController', 'showAll');
+//hay q dividir la ruta de arriba en todo/campo/:CAMPO y todo/limite/LIMITE
+
 
 $router->addRoute('/ligas', 'GET', 'LeagueController', 'showLeagues');
 $router->addRoute('/ligas/:ID', 'GET', 'LeagueController', 'showIDLeague');

@@ -23,9 +23,8 @@ class LeagueController
         return json_decode($this->data);
     }
 
-
     // Muestro la LIGA completa
-    public function showLeagues($params = null)
+    public function showLeagues()
     {
         $ligas = $this->leagueModel->getAllLigas();
         return $this->leagueView->response($ligas, 200);
