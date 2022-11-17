@@ -1,51 +1,82 @@
-Bienvenido al tp de web2 de juan y mati
-ENDPOINTS
-agregar: localhost/WEB2-TP2-BIDI/api/equipos  (PARAMETROS)  (equipos o ligas)(PUT)
-actualizar: localhost/WEB2-TP2-BIDI/api/equipos/num  (num=id del que va a modificar)(PARAMETROS) (equipos o ligas)(POST)
-borrar: localhost/WEB2-TP2-BIDI/api/equipos/num (ligas o equipos)(num=id del cual se quiere eliminar) (DELETE)
-compaginar: localhost/WEB2-TP2-BIDI/api/equipos/paginar/1 (el numero final es la pagina que quiere ir) (GET)
-ordenar por,Asc o Desc: localhost/WEB2-TP2-BIDI/api/equipos/ordenar/nombre/asc (GET)
-
-(parametros a tener en cuenta : id_equipo, id_fk_liga, nombre, logo, historia, jugadores)
-
-EJ DE PARAMETROS PARA AGREGAR EQUIPOS:
+# LIGAS Y EQUIPOS DE BASQUET
+**La idea de este trabajo practico era crear una pagina que respondiera a las necesidades de una página de basquet donde los fans pudiesen ver e informarse sobre los equipos que existen en cada liga. Incluyendo ligas como la nba para mas atraccion del publico y otras ligas alrededor del mundo y asi fomentar mas el conocimiento**
+*importar base de datos: dentro de nuestra carpeta de xampps en htdocs usar git (git bash here) y extraer los archivos del github con un clone o lo que crea conveniente*
+## ENDPOINTS
+*Agregar:* https://localhost/WEB2-TP2-BIDI/api/equipos  (PARAMETROS)  (equipos)**PUT**
 { "id_fk_liga": 1,
-    "nombre": "Club Atlético Barrio Parque(Córdoba) MATIASSSSSSSSS",
-    "logo": "imagen/barrioParqueArg.pngMATIAAAASS",
-    "historia": "LA MEJORASDAAAAAAAAAAA",
-    "jugadores":"MATIASSSSS"
+    "nombre": "Club Atlético TABIERES",
+    "logo": "imagen/TABIERES.PNG",
+    "historia": "LTWERTERTWERTWRTWERTEWRT",
+    "jugadores":"QWERWERWQERQWERQWERQWERWE, MARTIN"
     }
+https://localhost/WEB2-TP2-BIDI/api/ligas  (PARAMETROS)  (ligas)**PUT**
+ {
+    "logo": "imagen/PUT.PNG",
+    "liga": "liga PUT",
+    "record": "Campeonatos por entrenadores INSERT",
+    "historia": "La Liga Nacional de Básquet es la liga de baloncesto INSERT"
+}
 
+*Actualizar:* https://localhost/WEB2-TP2-BIDI/api/equipos/2 **POST** *2=id del equipo*
+{ "id_fk_liga": 1,
+    "nombre": "Club Atletico SAN JUAN",
+    "logo": "imagen/atleticoSanJuan.png",
+    "historia": "Ejemplo de historia",
+    "jugadores":"Matias Rignoli, JuaN Ravioli"
+    }
+https://localhost/WEB2-TP2-BIDI/api/ligas/2 **POST** *2=id de la liga*
+{
+    "logo": "imagen/PUT.PNG",
+    "liga": "liga PUT",
+    "record": "Campeonatos por entrenadores INSERT",
+    "historia": "La Liga Nacional de Básquet es la liga de baloncesto INSERT"
+}
 
+*Borrar:* https://localhost/WEB2-TP2-BIDI/api/equipos/num (ligas o equipos)(num=id del cual se quiere eliminar) **DELETE**
 
+*Compaginar:* https://localhost/WEB2-TP2-BIDI/api/equipos/pagina/1 *(el numero final es la pagina que quiere ir)* **GET**
 
--Primeros pasos de router (matias)
-public function controllerparam(&param=null)->si este param no se trae te lo cambia a null y lo permito igual
--POSTMAN create a request=agregar esta linea en el postman + el metodo https://localhost/WEB2-TP2-BIDI/
+*Ordenar por,Asc o Desc:* https://localhost/WEB2-TP2-BIDI/api/equipos/ordenar/parametros/asc **GET**
 
-6/11 matias
-hay un error en el controller que nose que es lo que lo produce, nose como solucionarlo. Por ahora mi unico objetivo era realizar una consulta y que me devuelva todo de ligas
+*parametros : id_equipo, id_fk_liga, nombre, logo, historia, jugadores*
 
-7/11 Juan
-Acomode el error en controller, agregue cositas JSONView, view, y routers, que hacen que ande en la consulta y lo devuelva y muestra :D
----Juan muestro Ligas completa (GET)
----Muestro ligas por ID (GET)
----Agrego liga (POST)
----Borro liga (DELETE)
----Modifico league (PUT)
-
-7/11 matias
-agregue funciones en team, por ahora solo hay una, mañana continuo. Creo que tambien tengo que arreglar el delete de ligas para que elimine todos los equipos tambien
-
-8/11 matias
-agregue mas funciones a team , limpie algo de codigo y agregue llaves
-Intente proseguir con el addTeam, imposible nose como tomar la fk para checkearla, ELIMINAR LIGA tiene un error tambien, deje comentarios en las lineas q para mi no tienen mucho sentido o no entienod porque estan ahi, MODIFICAR LIGA tambien tiene un error, no checkea que todos los parametros esten llenos igual que pasa con AGREGAR LIGA
-
-10/11  matias
-modifique el if de errores, param solo es utilizable si se manda por get no por post
-
-15/11 matias
-limpie codigo, agregue funciones de team, hice el compaginado de la pagina pero me quedo incoompleto, me falta separarlo en dos
-
-15/11 matias
-Agregue funciones, agregue paginado, mejore sintaxis para ordenar parametros de una manera mas limpia, separe funciones
+### traer todos los elementos
+https://localhost/WEB2-TP2-BIDI/api/equipos 
+*json* [   {
+        "id_equipo": 21,
+        "id_fk_liga": 1,
+        "nombre": "Club Atlético Barrio Parque(Córdoba) MATIASSSSSSSSS",
+        "logo": "imagen/barrioParqueArg.pngMATIAAAASS",
+        "historia": "LA MEJORASDAAAAAAAAAAA",
+        "jugadores": "MATIASSSSS"
+    }
+]
+https://localhost/WEB2-TP2-BIDI/api/ligas
+*json* [     {
+        "idLiga": 47,
+        "logo": "imagen.png",
+        "liga": "liga argentina",
+        "record": "Campeonatos por entrenadores",
+        "historia": "22"
+    },
+]
+### traer elementos por id
+https://localhost/WEB2-TP2-BIDI/api/equipos/1 **1=num de id**
+*json* [   {
+        "id_equipo": 21,
+        "id_fk_liga": 1,
+        "nombre": "Club Atlético Barrio Parque(Córdoba) MATIASSSSSSSSS",
+        "logo": "imagen/barrioParqueArg.pngMATIAAAASS",
+        "historia": "LA MEJORASDAAAAAAAAAAA",
+        "jugadores": "MATIASSSSS"
+    }
+]
+https://localhost/WEB2-TP2-BIDI/api/ligas/1 **1=num de id**
+*json* [     {
+        "idLiga": 47,
+        "logo": "imagen.png",
+        "liga": "liga argentina",
+        "record": "Campeonatos por entrenadores",
+        "historia": "22"
+    },
+]

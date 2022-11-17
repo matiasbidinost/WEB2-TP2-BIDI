@@ -9,7 +9,7 @@ class LeagueModel
   public function getAllLigas()
   { 
     // Obtengo todas las ligas
-    $query = $this->db->prepare('SELECT * FROM ligas ORDER BY liga ASC');
+    $query = $this->db->prepare('SELECT * FROM ligas ORDER BY idliga ASC');
     $query->execute();
     return $query->fetchAll(PDO::FETCH_OBJ);
   }

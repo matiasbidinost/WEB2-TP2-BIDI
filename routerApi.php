@@ -10,7 +10,7 @@ $router = new Router();
 // define la tabla de ruteo
 
 $router->addRoute('/equipos/ordenar/:CAMPO/:ORDEN','GET','TeamController', 'showAll');
-$router->addRoute('/equipos/paginar/:PAGNUM','GET','TeamController','showAllLimit');
+$router->addRoute('/equipos/pagina/:PAGNUM','GET','TeamController','showAllLimit');
 
 
 $router->addRoute('/ligas', 'GET', 'LeagueController', 'showLeagues');

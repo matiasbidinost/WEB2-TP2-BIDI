@@ -32,7 +32,7 @@ class TeamController
 
 
             if ($orden == 'ASC') {
-                if (isset($teams[1]->$campo)) {
+                if (isset($teams[1]->$campo)) { 
 
                     $equipos = $this->teamModel->getAllTeamsAsc($campo);
                     $this->teamView->response($equipos, 200);

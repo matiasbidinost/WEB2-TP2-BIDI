@@ -30,6 +30,7 @@ class LeagueController
     // Muestro la Liga por ID
     public function showIDLeague($params = null)
     {
+        if(isset($params)&&!empty($params)){
         $id = $params[':ID'];
 
         $ligas = $this->leagueModel->getLigasID($id);
@@ -37,6 +38,9 @@ class LeagueController
             $this->leagueView->response($ligas, 200);
         } else {
             $this->leagueView->response("La liga con el id=$id no existe", 404);
+        }
+    }else{
+        $this->leagueView->response("Los parametros estan vacios", 404);
         }
     }
     // Elimino una Liga por ID
