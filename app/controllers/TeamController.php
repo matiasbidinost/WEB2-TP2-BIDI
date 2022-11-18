@@ -1,12 +1,12 @@
 <?php
 require_once "./app/models/TeamModel.php";
-require_once "./app/models/LeagueModel.php"; 
+require_once "./app/models/LeagueModel.php";
 require_once "./api/JSONView.php";
 
 class TeamController
 {
     private $teamModel;
-    private $leagueModel; 
+    private $leagueModel;
     private $teamView;
 
     private $data;
@@ -14,7 +14,7 @@ class TeamController
     public function __construct()
     {
         $this->teamModel = new TeamModel();
-        $this->leagueModel = new LeagueModel(); 
+        $this->leagueModel = new LeagueModel();
         $this->teamView = new JSONView();
         $this->data = file_get_contents("php://input");
     }
@@ -28,26 +28,21 @@ class TeamController
         if (isset($params) && !empty($params)) {
             $orden = strtoupper($params[':ORDEN']);
             $campo = strtolower($params[':CAMPO']);
-            $teams = $this->teamModel->getAllteams();
+            $teams = $this->teamModel->getAllTeamsTable($campo);
+            if (!empty($orden)) {
+                if ($orden == "ASC" or $orden == "DESC") {
+                    if (!empty($teams)) {
 
-
-            if ($orden == 'ASC') {
-                if (isset($teams[1]->$campo)) { 
-
-                    $equipos = $this->teamModel->getAllTeamsAsc($campo);
-                    $this->teamView->response($equipos, 200);
+                        $equipos = $this->teamModel->getAllTeamsOrder($campo, $orden);
+                        $this->teamView->response($equipos, 200);
+                    } else {
+                        $this->teamView->response("error, no se puede ordenar por un parametro inexistente ", 404);
+                    }
                 } else {
-                    $this->teamView->response("error, no se puede ordenar por un parametro inexistente ", 404);
-                }
-            } else if ($orden == 'DESC') {
-                if (isset($teams[1]->$campo)) {
-                    $equipos = $this->teamModel->getAllTeamsDesc($campo);
-                    $this->teamView->response($equipos, 200);
-                } else {
-                    $this->teamView->response("error, no se puede ordenar por un parametro inexistente ", 400);
+                    $this->teamView->response("usted no utilizo un orden valido, utilice la palabra correcta", 400);
                 }
             } else {
-                $this->teamView->response("usted no utilizo un orden valido, utilice la palabra correcta", 400);
+                $this->teamView->response("usted no agrego un orden", 400);
             }
         } else {
             $this->teamView->response("error, debe decidir en que orden van los elementos (ASC=ascendente o DESC=descendente),y por cual campo", 400);

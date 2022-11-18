@@ -6,9 +6,9 @@ class TeamModel
   {
     $this->db = new PDO('mysql:host=localhost;' . 'dbname=liga;charset=utf8', 'root', '');
   }
-  public function getAllTeamsAsc($campo)
+  public function getAllTeamsOrder($campo,$orden)
   {
-    $query = $this->db->prepare('SELECT * FROM equipos ORDER BY ' . $campo . ' ASC');
+    $query = $this->db->prepare('SELECT * FROM equipos ORDER BY ' . $campo .' ' .$orden);
     $query->execute();
     return $query->fetchAll(PDO::FETCH_OBJ);
   }
@@ -18,17 +18,17 @@ class TeamModel
     $query->execute();
     return $query->fetchAll(PDO::FETCH_OBJ);
   }
-  public function getAllTeamsDesc($campo)
-  {
-    $query = $this->db->prepare('SELECT * FROM equipos ORDER BY ' . $campo . ' DESC');
-    $query->execute();
-    return $query->fetchAll(PDO::FETCH_OBJ);
-  }
   public function getAllTeams()
   {
     $query = $this->db->prepare('SELECT * FROM equipos ORDER BY id_equipo ASC');
     $query->execute();
     return $query->fetchAll(PDO::FETCH_OBJ);
+  }
+  public function getAllTeamsTable($campo)
+  {
+    $query = $this->db->prepare('SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = "equipos" AND COLUMN_NAME="'.$campo.'"');
+    $query->execute();
+    return $query->fetch(PDO::FETCH_COLUMN);
   }
   public function getTeamById($id)
   {
